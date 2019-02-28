@@ -30,7 +30,7 @@ except:
 num = 0
 for num in range(0,17):
     if num in {9,12,13,16,17}:
-        num += 1
+        pass
     else:
         time.sleep(1)
         PubFunction.driver.find_element_by_link_text("参数配置").click()
