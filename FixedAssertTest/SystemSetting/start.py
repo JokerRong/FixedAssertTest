@@ -1,8 +1,8 @@
 #  -*-coding:utf-8-*-
 import sys
 sys.path.append("D:\\Fixedtest\\FixedAssertTest\\Common")
-# import PubFunction
-from Common import PubFunction
+import PubFunction
+# from Common import PubFunction
 import traceback
 
 logContents = "+++++++++++++++++++++++++ begin"
