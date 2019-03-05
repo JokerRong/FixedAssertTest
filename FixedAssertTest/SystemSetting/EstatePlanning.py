@@ -22,8 +22,8 @@ time.sleep(3)
 基础参数配置
 """
 time.sleep(2)
-num = 8
-for num in range(8,17):
+num = 1
+for num in range(1,17):
     if num in {9,12,13,16,17}:
         pass
     else:
@@ -31,7 +31,7 @@ for num in range(8,17):
         driver.find_element_by_link_text("参数配置").click()
         ul = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div/div/div/ul")
         li_list = ul.find_elements_by_css_selector("li")
-        time.sleep(1)
+        time.sleep(1.5)
         li_list[num].find_element_by_xpath("./button").click()
 
         time.sleep(0.5)
