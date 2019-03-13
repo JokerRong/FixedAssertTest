@@ -23,9 +23,10 @@ def login():
 
 # 进入资产规划界面
 def enter_estate_planing(tabplace):
-    driver.implicitly_wait(5)
-    time.sleep(1)
+    # driver.implicitly_wait(5)
+    time.sleep(3)
     driver.find_element_by_link_text("资产购置").click()
+    time.sleep(1)
     ul = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div/div/div/ul")
     li_list = ul.find_elements_by_css_selector("li")
     li_list[int(tabplace)].find_element_by_xpath("./button").click()
@@ -144,7 +145,7 @@ def fill_plan_form(plan_data, button):
 def input_date(name, data):
     js = 'document.getElementsByName("' + name + '")[0].removeAttribute("readonly");' 
     driver.execute_script(js)
-    driver.find_element_by_name("planningDateTime").send_keys(data)
+    driver.find_element_by_name(name).send_keys(data)
 
 
 # choose one line
@@ -154,6 +155,7 @@ def choose_one_line(code):
     driver.find_element_by_xpath("//*[contains(text(),'"+ str(code) + "')]" ).click()
     
 
+# 新增资产规划明细表
 def fill_detail_table(record, button):
     time.sleep(1)
     driver.find_element_by_name("assetName").send_keys(record['estate_name'])
@@ -169,3 +171,60 @@ def fill_detail_table(record, button):
         driver.find_element_by_class_name("btn-primary").click()
     else :
         driver.find_element_by_class_name("btn-danger").click()
+
+
+# 资产调入 新增资产申购单
+def transfer_planing_bill(code , tender_state, number):
+    name = "申购名称" + str(random.randint(1, 200))
+    driver.find_element_by_name("name").send_keys(name)
+    
+    if tender_state is True:
+        true_path = "/html/body/div[1]/div/div/div[2]/form/div/div[2]/div/div/div[1]/label/span"
+        driver.find_element_by_xpath(true_path).click()
+    else:
+        false_path = "/html/body/div[1]/div/div/div[2]/form/div/div[2]/div/div/div[2]/label/span"
+        driver.find_element_by_xpath(false_path).click()
+    
+    choose_one_line(code)
+
+    tbody = driver.find_element_by_xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/table/tbody")
+    tr_list = tbody.find_elements_by_css_selector("tr")
+    for num in range (0, int(number)):
+        tr_list[num].find_element_by_xpath("./td['"+ str(num) +"']/input").click()
+    
+    driver.find_element_by_class_name("btn-primary").click()
+    time.sleep(1)
+    line = driver.find_element_by_xpath("//*[contains(text(),'" + str(code) + "')]")
+    order_number = line.find_element_by_xpath("../td[2]").text
+    return order_number
+
+
+# 新增资产购置订单  将申购单新增成为购置单
+def add_order(code):
+    time.sleep(1)
+    table = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[2]/div[1]/table")
+    td = table.find_element_by_xpath("//*[contains(text(),'" + str(code) + "')]")
+    td.find_element_by_xpath("../td[2]/input").click()
+    driver.find_element_by_name("submitDetectionInterval").click()
+
+
+# 填充资产购置单的订单信息
+def fill_asset_acquisition_detail(upload_file_path):
+    time.sleep(1)
+    pay_time_path = "/html/body/div[1]/div/div/div/div[2]/div/form/div[3]/div[1]/div/div/div[1]/span/span[1]"
+    driver.find_element_by_xpath(pay_time_path).click()
+    pay_time_xpath = "/html/body/div[1]/div/div/div/div[2]/div/form/div[3]/div[1]/div/div/input[1]"
+    driver.find_element_by_xpath(pay_time_xpath).send_keys(1)
+    time.sleep(1)
+    driver.find_element_by_xpath(pay_time_xpath).send_keys(Keys.ENTER)
+
+    # fahuoxingshi
+    driver.find_element_by_id("shippingForm").send_keys("快递发送")
+    input_date("deliveryDate", time.strftime("%Y-%m-%d", time.localtime()))
+    input_date("arrivalDate", time.strftime("%Y-%m-%d", time.localtime()))
+    
+    # uoload file
+    driver.find_element_by_id("installationUploadFile").send_keys(upload_file_path)
+    
+    time.sleep(3)
+    driver.find_element_by_class_name("btn-primary").click()
