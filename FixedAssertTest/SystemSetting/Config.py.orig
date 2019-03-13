@@ -23,17 +23,21 @@ time.sleep(3)
 """
 time.sleep(2)
 num = 0
+<<<<<<< HEAD:FixedAssertTest/SystemSetting/Config.py
+for num in range(0, 18):
+=======
 for num in range(0,17):
+>>>>>>> ce07356576a5e12724c94fb12a3cb1c724af2e81:FixedAssertTest/SystemSetting/EstatePlanning.py
     if num in {9,12,13,16,17}:
         pass
     else:
         time.sleep(1)
         driver.find_element_by_link_text("参数配置").click()
-        ul = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div/div/div/div")
-        div_list = ul.find_elements_by_css_selector("div")
+        ul = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div/div/div/ul")
+        li_list = ul.find_elements_by_css_selector("li")
         driver.implicitly_wait(10)
         time.sleep(2)
-        div_list[num].click()
+        li_list[num].find_element_by_xpath("./button").click()
 
         time.sleep(0.5)
         driver.find_element_by_class_name("ion-plus-round").click()

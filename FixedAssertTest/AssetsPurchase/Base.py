@@ -22,13 +22,13 @@ def login():
 
 
 # 进入资产规划界面
-def enter_estate_planing():
+def enter_estate_planing(tabplace):
     driver.implicitly_wait(5)
     time.sleep(1)
     driver.find_element_by_link_text("资产购置").click()
     ul = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div/div/div/ul")
     li_list = ul.find_elements_by_css_selector("li")
-    li_list[0].find_element_by_xpath("./button").click()
+    li_list[int(tabplace)].find_element_by_xpath("./button").click()
     time.sleep(1)
 
 

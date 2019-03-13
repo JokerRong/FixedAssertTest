@@ -9,9 +9,10 @@ import Base
 
 Base.login()
 
-Base.enter_estate_planing()
+Base.enter_estate_planing(0)
 filepath = "D:\\Fixedtest\\FixedAssertTest\\FixedAssertTest\\AssetsPurchase\\data\\EstatePlanning.xlsx"
 
+"""
 # add plan table
 record_top = Base.get_top_table_data(filepath)
 Base.click_top_button(0)
@@ -25,3 +26,13 @@ while record_below:
     Base.choose_one_line(code)
     Base.click_below_button(0)
     Base.fill_detail_table(record, True)
+
+
+# Submitting for approval
+Base.choose_one_line( code)
+Base.click_top_button(3)
+"""
+
+# enter zi chan shen gou 
+Base.enter_estate_planing(1)
+Base.click_top_button(1)
