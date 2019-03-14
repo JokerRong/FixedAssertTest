@@ -102,10 +102,14 @@ def click_top_button(place):
 
 
 # click the botton below
-def click_below_button(place):
-    time.sleep(2)
-    ul_below_xpath = "/html/body/main/div/div/div/section/div/div/div/div[6]/div/ul"
-    ul_below = driver.find_element_by_xpath(ul_below_xpath)
+def click_below_button(place, xpath = 0):
+    time.sleep(1)
+    if xpath == 0:
+        ul_below_xpath = "/html/body/main/div/div/div/section/div/div/div/div[6]/div/ul"
+        ul_below = driver.find_element_by_xpath(ul_below_xpath)
+    else:
+        ul_below_xpath = "/html/body/main/div/div/div/section/div/div/div/div[5]/div/ul"
+        ul_below = driver.find_element_by_xpath(ul_below_xpath)
     li_list_below = ul_below.find_elements_by_css_selector("li")
     driver.implicitly_wait(5)
     li_list_below[place].find_element_by_xpath("./button").click()
@@ -228,3 +232,70 @@ def fill_asset_acquisition_detail(upload_file_path):
     
     time.sleep(3)
     driver.find_element_by_class_name("btn-primary").click()
+
+
+# 通过下拉列表name选择参数
+def select_from_list_by_name(name, value):
+    time.sleep(0.5)
+    outbox = driver.find_element_by_name(name)
+    outbox.click()
+    outbox.find_element_by_xpath("./input[1]").send_keys(value)
+    time.sleep(0.5)
+    outbox.find_element_by_xpath("./input[1]").send_keys(Keys.ENTER)
+
+# 上传文件
+def upload_file(button_input_id, filepath):
+    driver.find_element_by_id(button_input_id).send_keys(filepath)
+
+
+# x新增开箱检验单
+def add_check_list():
+    # 外观状态
+    select_from_list_by_name("exteriorStatus", "外观")
+        
+    # 包装情况
+    select_from_list_by_name("packageStatus", "包装")
+
+    # 清点情况
+    select_from_list_by_name("inventoryStatus", "清点")
+
+    # 上传附件
+    filepath = "D:\\Fixedtest\\FixedAssertTest\\FixedAssertTest\\AssetsPurchase\\data\\1.jpeg"
+    upload_file("uploadFile", filepath)
+
+    time.sleep(3)
+    driver.find_element_by_class_name("btn-primary").click()
+    time.sleep(1)
+
+
+# 安装验收单
+def install_list(number, filepath):
+    driver.find_element_by_name("manufacturer").send_keys("制造厂家")
+    input_date("manufactureDate", "2019-03-01")
+    # 资产编号
+    assets_num = time.strftime("%Y%m%d%H%M", time.localtime())
+    assets_num = "ZC" + str(assets_num) + "NO" + str(number)
+    driver.find_element_by_name("assetCode").send_keys(assets_num)
+    # 使用部门
+    select_from_list_by_name("useDepartment", "信息化部")
+    # 安装部门
+    select_from_list_by_name("installationDepartment", "信息化部")
+    # 现场负责人
+    driver.find_element_by_name("onSitePeople").send_keys("Joker")
+    # 安装位置
+    driver.find_element_by_name("installationLocation").send_keys("安装位置")
+    # 验收结果
+    select_from_list_by_name("acceptanceResults", "验收")
+    # 验收成员
+    driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[2]/form/div[7]/div/div/div").click()
+    time.sleep(1)
+    person_xpath = "/html/body/div[1]/div/div/div/div[2]/form/div[7]/div/div/div/div[1]/input"
+    driver.find_element_by_xpath(person_xpath).send_keys("吕俐蓉")
+    time.sleep(0.25)
+    driver.find_element_by_xpath(person_xpath).send_keys(Keys.ENTER)
+    upload_file("installationUploadFile", filepath)
+    time.sleep(0.5)
+    driver.find_element_by_class_name("btn-primary").click()
+    time.sleep(0.5)
+    
+    
