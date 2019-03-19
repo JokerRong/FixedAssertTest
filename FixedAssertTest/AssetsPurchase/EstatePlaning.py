@@ -19,6 +19,7 @@ filepath = "D:\\Fixedtest\\FixedAssertTest\\FixedAssertTest\\AssetsPurchase\\dat
 record_top = Base.get_top_table_data(filepath)
 Base.click_top_button(0)
 code = Base.fill_plan_form(record_top, True)
+print("code is  " + code)
 time.sleep(2)
 
 
@@ -36,6 +37,6 @@ while record_below:
 """
  提交新增的资产规划单
 """
-Base.choose_one_line( code)
+Base.choose_one_line(code)
 Base.click_top_button(3)
 

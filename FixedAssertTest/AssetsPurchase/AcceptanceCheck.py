@@ -2,8 +2,9 @@ import Base
 
 Base.login()
 # 进入资产验收界面
+code = ""
 Base.enter_estate_planing(4)
-code = "201903150001"
+
 Base.choose_one_line(code)
 
 tbody_xpath = "/html/body/main/div/div/div/section/div/div/div/div[6]/table/tbody"
