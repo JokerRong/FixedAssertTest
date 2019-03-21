@@ -27,9 +27,9 @@ def enter_estate_planing(tabplace):
     time.sleep(3)
     driver.find_element_by_link_text("资产购置").click()
     time.sleep(1)
-    ul = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div/div/div/ul")
-    li_list = ul.find_elements_by_css_selector("li")
-    li_list[int(tabplace)].find_element_by_xpath("./button").click()
+    div = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div")
+    span_list = div.find_elements_by_css_selector("span")
+    span_list[int(tabplace)].click()
     time.sleep(1)
 
 
