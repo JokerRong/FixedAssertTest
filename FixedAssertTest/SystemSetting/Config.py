@@ -46,7 +46,7 @@ for num in range(0,17):
         driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[3]/button[1]").click()
         # driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[3]/button[2]").click()
         
-        time.sleep(1)
+        time.sleep(1.5)
         driver.find_element_by_class_name("ion-plus-round").click()
         time.sleep(0.5)
         driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div/div/input").send_keys("002")

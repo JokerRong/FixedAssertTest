@@ -27,9 +27,9 @@ def enter_estate_planing(tabplace):
     time.sleep(3)
     driver.find_element_by_link_text("资产购置").click()
     time.sleep(1)
-    ul = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div/div/div/ul")
-    li_list = ul.find_elements_by_css_selector("li")
-    li_list[int(tabplace)].find_element_by_xpath("./button").click()
+    div = driver.find_element_by_xpath("/html/body/main/div/div/div/section/div/div/div")
+    span_list = div.find_elements_by_css_selector("span")
+    span_list[int(tabplace)].click()
     time.sleep(1)
 
 
@@ -277,9 +277,9 @@ def install_list(number, filepath):
     assets_num = "ZC" + str(assets_num) + "NO" + str(number)
     driver.find_element_by_name("assetCode").send_keys(assets_num)
     # 使用部门
-    select_from_list_by_name("useDepartment", "信息化部")
+    select_from_list_by_name("useDepartment", "检测站")
     # 安装部门
-    select_from_list_by_name("installationDepartment", "信息化部")
+    select_from_list_by_name("installationDepartment", "检测站")
     # 现场负责人
     driver.find_element_by_name("onSitePeople").send_keys("Joker")
     # 安装位置
@@ -290,9 +290,10 @@ def install_list(number, filepath):
     driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[2]/form/div[7]/div/div/div").click()
     time.sleep(1)
     person_xpath = "/html/body/div[1]/div/div/div/div[2]/form/div[7]/div/div/div/div[1]/input"
-    driver.find_element_by_xpath(person_xpath).send_keys("吕俐蓉")
+    driver.find_element_by_xpath(person_xpath).send_keys("管理员")
     time.sleep(0.25)
     driver.find_element_by_xpath(person_xpath).send_keys(Keys.ENTER)
+    driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[2]/form/div[8]/div/div").click()
     upload_file("installationUploadFile", filepath)
     time.sleep(0.5)
     driver.find_element_by_class_name("btn-primary").click()
