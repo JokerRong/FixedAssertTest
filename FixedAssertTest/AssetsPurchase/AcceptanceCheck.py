@@ -2,7 +2,7 @@ import Base
 
 Base.login()
 # 进入资产验收界面
-code = ""
+code = "201903260004"
 Base.enter_estate_planing(4)
 
 Base.choose_one_line(code)

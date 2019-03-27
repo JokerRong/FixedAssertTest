@@ -8,8 +8,8 @@ Base.login()
 """
 进入资产购置界面，新增资产购置订单，新增购置信息，获得订单号
 """
-code = ""
-order_number = ""
+code = "201903261318"
+order_number = "201903260005"
 Base.enter_estate_planing(3)
 Base.click_top_button(0)
 Base.add_order(code)
