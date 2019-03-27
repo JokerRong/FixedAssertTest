@@ -180,7 +180,7 @@ def get_below_table_data(place):
    driver.implicitly_wait(5)
    tr_list[int(place)].click()
 
-# 选中表格列表中的数据(物料收发中入库)  
+# 选中表格列表中的数据(物料收发中入库)  /html/body/main/div/div/div/section/div[2]/div/div/div/div[2]/div[3]/table/tbody
 def get_below_table_data_out(place):
    ul_xpath="/html/body/div[1]/div/div/div/div[2]/div[2]/table/tbody"
    ul=driver.find_element_by_xpath(ul_xpath)
@@ -234,12 +234,12 @@ def ready(button):
     al="/html/body/div[1]/div/div/div/div[2]/div[1]/form/table/tbody/tr[1]/td[6]/input"
     driver.find_element_by_xpath(al).click()
     driver.find_element_by_xpath(al).send_keys("3")
-    bl="/html/body/div[1]/div/div/div/div[2]/div[1]/form/table/tbody/tr[2]/td[6]/input"
-    driver.find_element_by_xpath(bl).click()
-    driver.find_element_by_xpath(bl).send_keys("3")
-    cl="/html/body/div[1]/div/div/div/div[2]/div[1]/form/table/tbody/tr[3]/td[6]/input"
-    driver.find_element_by_xpath(cl).click()
-    driver.find_element_by_xpath(cl).send_keys("3")
+    # bl="/html/body/div[1]/div/div/div/div[2]/div[1]/form/table/tbody/tr[2]/td[6]/input"
+    # driver.find_element_by_xpath(bl).click()
+    # driver.find_element_by_xpath(bl).send_keys("3")
+    # cl="/html/body/div[1]/div/div/div/div[2]/div[1]/form/table/tbody/tr[3]/td[6]/input"
+    # driver.find_element_by_xpath(cl).click()
+    # driver.find_element_by_xpath(cl).send_keys("3")
     time.sleep(1)
     if button is True:
         driver.find_element_by_class_name("btn-primary").click()
