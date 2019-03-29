@@ -28,10 +28,10 @@ def subject():
     time.sleep(1)
     driver.find_element_by_id("1ff2a1d3-62eb-4b37-ad42-f8bf3e57dac7_anchor").click()
     time.sleep(1)
-    driver.find_element_by_name("addLibrary").click() 
-    time.sleep(1)
-    driver.find_element_by_id("libraryNameForModel").click()
-    driver.find_element_by_id("libraryNameForModel").send_keys("通用能力题库23")
+    # driver.find_element_by_name("addLibrary").click() 
+    # time.sleep(1)
+    # driver.find_element_by_id("libraryNameForModel").click()
+    # driver.find_element_by_id("libraryNameForModel").send_keys("通用能力题库23")
 
 
 # 点击确定按钮
@@ -246,7 +246,17 @@ def option():
 
 
 
+def click_button(place):
+    ul = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div/ul")
+    button_list = ul.find_elements_by_css_selector("button")
+    button_list[int(place)].click()
 
+
+
+def select_term(typename):
+    driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[2]/div/form/div[2]/div[1]/div/div/div[1]").click()
+    type_ul = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div[2]/div/form/div[2]/div[1]/div/div/ul")
+    type_ul.find_element_by_xpath("//*[contains(text(),'" + str(typename) + "')]").click()
 
 
 
